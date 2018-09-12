@@ -7,9 +7,20 @@
 * R and Rscript
 
 ### Setup
-Download the utility:
+Download the last relase:
 
-Download the R script to plot the graphs:
+
+Download and compile the utility:
+
+`$ git clone https://gitlab.com/TrollSlayer/crypto-watch`
+
+`$ cd crypto-watch`
+
+`$ cargo build --release`
+
+`$ mkdir compiled`
+
+`$ cp target/release/crypto_watch compiled && cp graph.r compiled`
 
 Go to https://pro.coinmarketcap.com/ and create an account. Save the API key.
 
