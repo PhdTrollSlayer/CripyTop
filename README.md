@@ -8,7 +8,10 @@
 
 ### Setup
 Download the last relase:
+https://gitlab.com/TrollSlayer/crypto-watch/tree/master/releases/0.1.0
+and put the files in a separate folder.
 
+OR
 
 Download and compile the utility:
 
