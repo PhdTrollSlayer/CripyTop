@@ -1,0 +1,11 @@
+[package]
+name = "crypto_watch"
+version = "0.1.0"
+authors = ["Rodrigo <rodrigomauricio@protonmail.com>"]
+
+[dependencies]
+serde_json = "*"
+csv = "*"
+serde = "*"
+serde_derive = "*"
+argparse = "0.2.2"
