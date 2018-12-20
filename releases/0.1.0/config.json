@@ -1,0 +1,24 @@
+{
+  "api_key": "asudai-sugdasb-daisdbaosidb",
+  "ref_slug": "bitcoin",
+  "data": [
+  {
+    "website_slug": "bitcoin",
+    "wallet": 20
+  },
+  {
+    "website_slug": "ripple",
+    "wallet": 12
+  },
+  {
+    "website_slug": "dash",
+    "wallet": 154
+  },
+  {
+    "website_slug": "monero",
+    "wallet": 60
+  }
+
+  ]
+}
+

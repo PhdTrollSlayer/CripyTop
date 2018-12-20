@@ -3,7 +3,7 @@ use std::fs::File;
 use std::process::Command;
 
 pub fn generate_graph(r: &String) {
-    let reader = Reader::from_reader(File::open("history.csv").unwrap());
+    let reader = Reader::from_reader(File::open("history.csv").expect("Could not open history.csv"));
     let mut iter = reader.into_records();
 
     let mut records = Vec::<StringRecord>::new();
@@ -41,6 +41,4 @@ pub fn generate_graph(r: &String) {
         .arg(data)
         .output()
         .expect("Error when running R to build the graph");
-
-
 }
