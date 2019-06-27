@@ -1,9 +1,14 @@
+#![feature(proc_macro_hygiene, decl_macro)]
+
 extern crate serde_json;
 extern crate csv;
 extern crate serde;
 #[macro_use]
 extern crate serde_derive;
 extern crate argparse;
+
+#[macro_use] extern crate rocket;
+use rocket::response::content;
 
 mod parser;
 mod writer;
@@ -13,42 +18,26 @@ use parser::*;
 use writer::*;
 use database_parser::*;
 
-use argparse::{ArgumentParser, StoreTrue, Store};
 
-fn main() {
-    let mut slug = String::new();
-    let mut get_api_records = false;
-
-    {
-       let mut ap = ArgumentParser::new();
-       ap.set_description("Manipulate cryptocurrency market data locally.\n
-       Developer: Rodrigo Mauricio(TrollSlayer) <rodrigomauricio@protonmail.com>\n
-       Licenced under GNU's GPLv3.");
-       ap.refer(&mut slug)
-           .add_option(&["-G"], Store,
-           "Generate Graph");
-       ap.refer(&mut get_api_records)
-            .add_option(&["-A"], StoreTrue,
-            "Get ccryptocurrency data");
-       ap.parse_args_or_exit();
-    }
-
-    if get_api_records {
-        let config = List::new_config();
-        let api_return = List::new_request();
-
-        let mine = Crypto::get_needed(&config, &api_return.0, &api_return.1);
-
-        for x in &mine {
-            record(x);
-        }
-    }
-
-    if !slug.is_empty() {
-        generate_graph(&slug);
-    }
+#[get("/")]
+fn index() -> content::Html<String> {
     /*
+    let config = List::new_config();
+    let api_return = List::new_request();
+
+    let mine = Crypto::get_needed(&config, &api_return.0, &api_return.1);
     */
 
+    let mut data: Vec<String>;
 
+    data = gen_table();
+
+    dbg!(&data);
+
+    content::Html(
+        format!(include_str!("../site/index.html"), data[0], data[1], data[2], data[3]))
+}
+
+fn main() {
+    rocket::ignite().mount("/", routes![index]).launch();
 }

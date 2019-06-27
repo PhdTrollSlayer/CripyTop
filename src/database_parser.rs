@@ -2,13 +2,11 @@ use csv::*;
 use std::fs::File;
 use std::process::Command;
 
-pub fn generate_graph(r: &String) {
+pub fn gen_table() -> Vec<String>{
     let reader = Reader::from_reader(File::open("history.csv").expect("Could not open history.csv"));
     let mut iter = reader.into_records();
 
     let mut records = Vec::<StringRecord>::new();
-
-    let mut data = String::from("Rscript --vanilla graph.r ");
 
     loop {
         if let Some(result) = iter.next() {
@@ -19,26 +17,18 @@ pub fn generate_graph(r: &String) {
         }
     }
 
-    for x in records {
-        if x.get(1).unwrap() == r {
-            data.push_str(&x.get(2).unwrap().to_string());
-            data.push_str(",");
+    let u = records.get((records.len() - 7)..).unwrap();
+
+    let mut d: Vec<String> = Vec::new();
+
+    for x in u {
+        if !x.get(0 as usize).unwrap().is_empty() {
+            d.push(format!("<td>{}</td>
+                           <td>{}</td>
+                           <td>{}</td>
+                           <td>{}</td>", x.get(2).unwrap().trim(), x.get(3).unwrap().trim(),x.get(4).unwrap().trim(),x.get(5).unwrap().trim()))
+
         }
     }
-    data.pop();
-
-    let mut fln = String::from("graph_");
-    fln.push_str(&r);
-    fln.push_str(".jpg");
-
-    data.push_str(" ");
-    data.push_str(&r);
-    data.push_str(" ");
-    data.push_str(&fln);
-
-    let _gen = Command::new("sh")
-        .arg("-c")
-        .arg(data)
-        .output()
-        .expect("Error when running R to build the graph");
+    d
 }
