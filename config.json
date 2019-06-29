@@ -1,0 +1,23 @@
+{
+  "api_key": "f4246c3d-034e-49ac-8ef0-67f7b0b1c0ce",
+  "ref_slug": "bitcoin",
+  "data": [
+  {
+    "website_slug": "bitcoin",
+    "wallet": 20
+  },
+  {
+    "website_slug": "ripple",
+    "wallet": 12
+  },
+  {
+    "website_slug": "dash",
+    "wallet": 154
+  },
+  {
+    "website_slug": "monero",
+    "wallet": 60
+  }
+
+  ]
+}
